@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+    - name: pull test
+      run: docker pull ghcr.io/yujincat/yujincat-transfer-test:main
     - name: Build docker images
       run: docker build -t local:local .
     - name: Run tests
