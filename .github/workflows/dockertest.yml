@@ -22,9 +22,17 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: pull test
-      run: docker pull ghcr.io/yujincat/yujincat-transfer-test:main
-    - name: Build docker images
-      run: docker build -t local:local .
-    - name: Run tests
-      run: docker run -it local
+    - uses: docker/build-push-action@v2
+      with:
+        push: false
+        cache-from: type=gha
+#         target: ${{ env.target }}
+        tags: 'ghcr.io/yujincat/yujincat-transfer-test:main'
+#         secrets: GIT_AUTH_TOKEN=${{ secrets.ACTIONS_TOKEN }}
+
+#     - name: pull test
+#       run: docker pull ghcr.io/yujincat/yujincat-transfer-test:main
+#     - name: Build docker images
+#       run: docker build -t local:local .
+#     - name: Run tests
+#       run: docker run -it local
